@@ -4,6 +4,10 @@ import com.company.hrmanagement.entity.enums.TaskType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -34,9 +38,13 @@ public class Task {
     private User user;
 
     @Column(nullable = false,updatable = false)
+    @CreatedBy
+    @CreationTimestamp
     private Timestamp createdAt;
 
     @Column(nullable = false,updatable = false)
+    @LastModifiedBy
+    @UpdateTimestamp
     private Timestamp updatedAt;
     private String givenBy;// email whose gave task
 

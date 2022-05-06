@@ -130,7 +130,7 @@ public Response addHR_Manager(RegisterDto employeeDto){
     if (companyOptional.isPresent()) {
         Authentication currentDirector= SecurityContextHolder.getContext().getAuthentication();
 
-        if (currentDirector.getAuthorities().contains(Collections.singleton(RoleType.DIRECTOR))) {
+        if (currentDirector.getAuthorities().equals(Collections.singleton(RoleType.DIRECTOR))) {
             return new Response("HR_MANAGERS can only be added by DIRECTORS", false);
         }
         User director =(User) currentDirector.getPrincipal();
@@ -152,7 +152,7 @@ public Response addHR_Manager(RegisterDto employeeDto){
         if (companyOptional.isPresent()) {
             Authentication currentDirector= SecurityContextHolder.getContext().getAuthentication();
 
-            if (currentDirector.getAuthorities().contains(Collections.singleton(RoleType.DIRECTOR))) {
+            if (currentDirector.getAuthorities().equals(Collections.singleton(RoleType.DIRECTOR))) {
                 return new Response("HR_MANAGERS can only be added by DIRECTORS", false);
             }
             User director =(User) currentDirector.getPrincipal();
@@ -205,7 +205,7 @@ public Response addWorker(RegisterDto employeeDto){
     Optional<Company> optionalCompany= companyRepository.findByNameAndAddress(employeeDto.getCompany().getName(),employeeDto.getCompany().getAddress());
     if (optionalCompany.isPresent()) {
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
-        if (Collections.singleton(RoleType.HR_MANAGER).contains(authentication.getAuthorities())) {
+        if (Collections.singleton(RoleType.HR_MANAGER).equals(authentication.getAuthorities())) {
 return new Response("Employees can be added only by HR_MANAGERS",false);
         }
         User hr_manager=(User) authentication.getPrincipal();

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedBy;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -21,6 +22,7 @@ public class Salary {
     @Column(nullable = false)
     private double amount;
     @Column(updatable = false)
+    @CreatedBy
     @CreationTimestamp
     private Timestamp givenDate;
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
